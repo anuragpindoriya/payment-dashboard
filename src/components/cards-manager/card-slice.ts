@@ -6,7 +6,7 @@ export interface CardState {
   id: number;
   cardOwner: string;
   cardNumber: string;
-  validOn: string;
+  expiryDate: string;
   cardProvider: string;
   cvv: string;
   cardProviderBank: string;
@@ -41,7 +41,7 @@ const initialState: CardsSliceState = {
       id: 1,
       cardOwner: 'John Doe',
       cardNumber: '**** **** **** 1234',
-      validOn: '12/23',
+      expiryDate: '12/23',
       cardProvider: 'Visa',
       cvv: '123',
       cardProviderBank: 'Bank of America',
@@ -57,7 +57,7 @@ const initialState: CardsSliceState = {
       id: 2,
       cardOwner: 'John Doe',
       cardNumber: '**** **** **** 1234',
-      validOn: '12/23',
+      expiryDate: '12/23',
       cardProvider: 'Visa',
       cvv: '123',
       cardProviderBank: 'Bank of America',
@@ -73,7 +73,7 @@ const initialState: CardsSliceState = {
       id: 1,
       cardOwner: 'John Doe',
       cardNumber: '**** **** **** 1234',
-      validOn: '12/23',
+      expiryDate: '12/23',
       cardProvider: 'Visa',
       cvv: '123',
       cardProviderBank: 'Bank of America',
