@@ -4,12 +4,13 @@ import { Eye } from 'lucide-react'
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel.tsx'
 import gpay_card from '@/assets/images/gpay_card.png'
 import CardActions from '@/components/cards-manager/card-action.tsx'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 
 const CardSection = ({ title, cards }: { title: string; cards: CardState[] }) => {
   const [api, setApi] = useState<CarouselApi>()
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [count, setCount] = useState(0)
   const [showCardNumber, setShowCardNumber] = useState(false)
 
   useEffect(() => {
@@ -17,7 +18,7 @@ const CardSection = ({ title, cards }: { title: string; cards: CardState[] }) =>
       return
     }
 
-    // setCount(api.scrollSnapList().length)
+    setCount(api.scrollSnapList().length)
     setCurrentIndex(api.selectedScrollSnap())
 
     api.on('select', () => {
@@ -25,6 +26,13 @@ const CardSection = ({ title, cards }: { title: string; cards: CardState[] }) =>
     })
   }, [api])
 
+  const onDotButtonClick = useCallback(
+    (index: number) => {
+      if (!api) return
+      api.scrollTo(index)
+    },
+    [api],
+  )
   const renderCardNumber = (cardNumber: string) => {
     if (showCardNumber) {
       const chunks = [
@@ -94,6 +102,17 @@ const CardSection = ({ title, cards }: { title: string; cards: CardState[] }) =>
             ))}
           </CarouselContent>
         </Carousel>
+        <div className={'flex justify-center items-center gap-[5px]'}>
+
+          {Array.from({ length: count }).map((_, index) => (
+            <div
+              key={index}
+              className={`h-[7px]  bg-[#0C3F62] rounded-full cursor-pointer ${currentIndex === index ? 'w-[12px]' : 'w-[7px]'}`}
+              onClick={() => onDotButtonClick(index)}
+            ></div>
+          ))}
+        </div>
+
       </div>
       <CardActions card={cards[currentIndex]} />
     </div>
