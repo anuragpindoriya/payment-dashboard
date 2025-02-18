@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
+import cardReducer from '@/components/cards-manager/card-slice.ts'
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    card: cardReducer,
+  },
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
