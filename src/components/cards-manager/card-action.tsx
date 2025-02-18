@@ -3,12 +3,14 @@ import gpay from '@/assets/images/gpay.png'
 import { Button } from '@/components/ui/button.tsx'
 import { cardAction, CardState } from '@/components/cards-manager/card-slice.ts'
 import { useDispatch } from 'react-redux'
+import { toast } from 'sonner'
 
 const CardActions = ({ card }: { card: CardState }) => {
   const dispatch = useDispatch()
 
   const actionHandler = (card: CardState, actionType: keyof Pick<CardState, 'isCardLocked' | 'isCardArchived' | 'isCardDefault' | 'isAddToGPay'>) => {
     console.log(`Action: ${actionType}`, card)
+    toast('Action performed successfully')
     dispatch(cardAction({ id: card.id, property: actionType }))
   }
 
