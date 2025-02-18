@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { Button } from '@/components/ui/button.tsx'
-import { Plus } from 'lucide-react'
 import CardManagerTab from '@/components/cards-manager/card-manager-tab.tsx'
+import AddCardDialog from '@/components/cards-manager/add-card-dialog.tsx'
 
 export default function CardManager() {
 
@@ -26,10 +25,12 @@ export default function CardManager() {
           }
         </div>
         <div className={'mb-[10px]'}>
-          <Button variant={'pd-default'} className={''}><Plus className={'w-[12px]'} /> Add Card</Button>
+          {/*<Button variant={'pd-default'} className={''}><Plus className={'w-[12px]'} /> Add Card</Button>*/}
+          <AddCardDialog />
         </div>
       </div>
       <CardManagerTab />
+
     </div>
   )
 }
