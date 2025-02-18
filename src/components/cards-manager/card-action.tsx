@@ -16,24 +16,28 @@ const CardActions = ({ card }: { card: CardState }) => {
 
   const actions = [
     {
+      id: 'lock_Card',
       icon: <Lock width="14px" />,
       label: 'Lock Card',
       isActive: card?.isCardLocked,
       onClick: () => actionHandler(card, 'isCardLocked'),
     },
     {
+      id: 'archive_Card',
       icon: <Archive width="14px" />,
       label: 'Archive',
       isActive: card?.isCardArchived,
       onClick: () => actionHandler(card, 'isCardArchived'),
     },
     {
+      id: 'default_Card',
       icon: <Check width="14px" />,
       label: 'Set As Default',
       isActive: card?.isCardDefault,
       onClick: () => actionHandler(card, 'isCardDefault'),
     },
     {
+      id: 'add_to_gpay',
       icon: <img src={gpay} alt="gpay" className="h-full w-full" />,
       label: 'Add to GPay',
       isActive: card?.isAddToGPay,
@@ -52,6 +56,13 @@ const CardActions = ({ card }: { card: CardState }) => {
               action.isActive ? 'bg-[#0C3F62]' : 'bg-[#0FA1DB] hover:bg-[#0C3F62]'
             }`}>
             {action.icon}
+            {
+              action.id === 'add_to_gpay' && action.isActive &&
+              <div
+                className={'w-[34px] h-[34px] rounded-full z-[2] absolute bg-[#0C3F6250] flex justify-center items-center'}>
+                <Check width="14px" />
+              </div>
+            }
           </Button>
           <div className="text-center">{action.label}</div>
         </div>
