@@ -17,7 +17,7 @@ const CardStatesCollapsible: React.FC<CardStatesCollapsibleProps> = ({ icon, dis
     <Collapsible
       open={isOpen}
       onOpenChange={setIsOpen}
-      className="max-w-[366px] min-w-[343px] space-y-2"
+      className="lg:max-w-[366px] lg:min-w-[343px] space-y-2"
     >
       <CollapsibleTrigger asChild>
         <Button

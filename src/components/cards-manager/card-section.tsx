@@ -69,7 +69,7 @@ const CardSection = ({ title, cards }: { title: string; cards: CardState[] }) =>
         {title}
       </div>
     </div>
-    <div className="flex gap-[41px] pt-[15px]">
+    <div className="flex flex-col sm:flex-row gap-[41px] pt-[15px]">
       <div className="w-[340px] flex flex-col gap-[8px]">
         <div className="flex justify-end">
           <Button className={`text-[12px] text-[#0C3F62]  bg-[#0FA1DB30] hover:bg-[#0FA1DB30] px-[6px] py-[3px] h-fit`}
@@ -83,7 +83,7 @@ const CardSection = ({ title, cards }: { title: string; cards: CardState[] }) =>
             {cards.map((card, index) => (
               <CarouselItem key={index}>
                 <div
-                  className={`w-[340px] h-[180px] rounded-[4px] bg-[#0C3F62] text-white px-[16px] pt-[20px] pb-[27px] flex flex-col gap-[8px] ${card?.isAddToGPay ? 'bg-[#4086F4] ' : card.isCardLocked || card?.isCardArchived ? 'bg-[#6A94A5]' : card?.isCardDefault ? 'bg-[#0FA1DB]' : 'bg-[#0C3F62]'} relative`}>
+                  className={`min-w-[300px] sm:w-[340px] h-[180px] rounded-[4px] bg-[#0C3F62] text-white px-[16px] pt-[20px] pb-[27px] flex flex-col gap-[8px] ${card?.isAddToGPay ? 'bg-[#4086F4] ' : card.isCardLocked || card?.isCardArchived ? 'bg-[#6A94A5]' : card?.isCardDefault ? 'bg-[#0FA1DB]' : 'bg-[#0C3F62]'} relative`}>
                   <div className="flex justify-between">
                     {card?.isCardLocked && !card?.isAddToGPay &&
                       <Lock width="14px" className={'absolute top-[10px] left-[14px]'} />}

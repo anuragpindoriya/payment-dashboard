@@ -47,7 +47,7 @@ const CardActions = ({ card }: { card: CardState }) => {
 
   return (
     <div
-      className="bg-[#C2E2EE] rounded-[4px] px-[30px] py-[24px] mt-[32px] w-[200px] text-[#0C3F62] text-[10px] grid grid-cols-2 gap-x-[10px] gap-y-[10px] font-medium">
+      className="bg-[#C2E2EE] rounded-[4px] px-[30px] py-[24px] sm:mt-[32px] sm:w-[200px] text-[#0C3F62] text-[10px] grid grid-cols-4 sm:grid-cols-2 gap-x-[10px] gap-y-[10px] font-medium">
       {actions.map((action, index) => (
         <div key={index} className="flex flex-col justify-start items-center gap-[5px]">
           <Button

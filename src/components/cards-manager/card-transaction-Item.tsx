@@ -10,7 +10,8 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
   const isAmountCredited = transaction.transactionsType === 'credit'
 
   return (
-    <div className="h-[84px] pl-[23px] pt-[19px] flex justify-start gap-[2px] pb-[23px]" key={transaction.id}>
+    <div className="h-[95px] sm:h-[84px] pl-[23px] pt-[19px] flex justify-start gap-[2px] pb-[23px]"
+         key={transaction.id}>
       <div className="flex gap-[16px]">
         <div className="rounded-full bg-[#C2E2EE] w-[40px] h-[40px] flex justify-center items-center">
           {isAmountCredited ? (
