@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { Button } from '@/components/ui/button.tsx'
-import { ChevronDown, Eye, LayoutGrid, Settings2, Upload } from 'lucide-react'
+import { Archive, Check, ChevronDown, Eye, LayoutGrid, Lock, Settings2, Upload } from 'lucide-react'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel.tsx'
 import master_card from '@/assets/images/master_card.png'
 import hdfc_bank from '@/assets/images/hdfc_bank.png'
-//import gpay from '@/assets/images/gpay.png'
+import gpay from '@/assets/images/gpay.png'
 import gpay_card from '@/assets/images/gpay_card.png'
 
 export default function CardManagerTab() {
@@ -254,7 +254,36 @@ export default function CardManagerTab() {
               </Carousel>
             </div>
           </div>
-          <div className={'bg-[#C2E2EE] rounded-[4px] px-[38px] py-[25px] mt-[48px] w-[200px]'}>
+          <div
+            className={'bg-[#C2E2EE] rounded-[4px] px-[30px] py-[24px] mt-[32px] w-[200px] text-[#0C3F62] text-[10px] inline-grid grid-cols-2 justify-between gap-x-[10px] gap-y-[10px] font-medium'}>
+            <div className={'flex flex-col justify-start items-center gap-[5px]'}>
+              <Button className={'w-[34px] h-[34px] rounded-full bg-[#0FA1DB] p-0'}><Lock width={'14px'} /></Button>
+              <div className={'text-center'}>
+                Lock Card
+              </div>
+            </div>
+            <div className={'flex flex-col justify-start items-center gap-[5px]'}>
+              <Button className={'w-[34px] h-[34px] rounded-full bg-[#0FA1DB] p-0'}><Archive width={'14px'} /></Button>
+              <div className={'text-center'}>
+                Archive
+              </div>
+            </div>
+            <div className={'flex flex-col justify-start items-center gap-[5px]'}>
+              <Button className={'w-[34px] h-[34px] rounded-full bg-[#0FA1DB] p-0'}><Check width={'14px'} /></Button>
+              <div className={'text-center'}>
+                Set As
+                Default
+              </div>
+            </div>
+            <div className={'flex flex-col justify-start items-center gap-[5px]'}>
+              <Button className={'w-[34px] h-[34px] rounded-full bg-[#C2E2EE] hover:bg-[#C2E2EE] p-0'}>
+                <img src={gpay} alt={'gpay'} className={'h-full w-full'} />
+              </Button>
+              <div className={'text-center'}>
+                Add to GPay
+              </div>
+            </div>
+
 
           </div>
         </div>
@@ -334,7 +363,36 @@ export default function CardManagerTab() {
               </Carousel>
             </div>
           </div>
-          <div className={'bg-[#C2E2EE] rounded-[4px] px-[38px] py-[25px] mt-[48px] w-[200px]'}>
+          <div
+            className={'bg-[#C2E2EE] rounded-[4px] px-[30px] py-[24px] mt-[32px] w-[200px] text-[#0C3F62] text-[10px] inline-grid grid-cols-2 justify-between gap-x-[10px] gap-y-[10px] font-medium'}>
+            <div className={'flex flex-col justify-start items-center gap-[5px]'}>
+              <Button className={'w-[34px] h-[34px] rounded-full bg-[#0FA1DB] p-0'}><Lock width={'14px'} /></Button>
+              <div className={'text-center'}>
+                Lock Card
+              </div>
+            </div>
+            <div className={'flex flex-col justify-start items-center gap-[5px]'}>
+              <Button className={'w-[34px] h-[34px] rounded-full bg-[#0FA1DB] p-0'}><Archive width={'14px'} /></Button>
+              <div className={'text-center'}>
+                Archive
+              </div>
+            </div>
+            <div className={'flex flex-col justify-start items-center gap-[5px]'}>
+              <Button className={'w-[34px] h-[34px] rounded-full bg-[#0FA1DB] p-0'}><Check width={'14px'} /></Button>
+              <div className={'text-center'}>
+                Set As
+                Default
+              </div>
+            </div>
+            <div className={'flex flex-col justify-start items-center gap-[5px]'}>
+              <Button className={'w-[34px] h-[34px] rounded-full bg-[#C2E2EE] hover:bg-[#C2E2EE] p-0'}>
+                <img src={gpay} alt={'gpay'} className={'h-full w-full'} />
+              </Button>
+              <div className={'text-center'}>
+                Add to GPay
+              </div>
+            </div>
+
 
           </div>
         </div>
