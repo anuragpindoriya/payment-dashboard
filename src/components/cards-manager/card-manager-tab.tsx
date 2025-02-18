@@ -12,53 +12,15 @@ import { CardState } from '@/components/cards-manager/card-slice.ts'
 import CardStatesCollapsible from '@/components/cards-manager/card-states-collapsible.tsx'
 import CardTransactionsCollapsible from '@/components/cards-manager/card-transactions-collapsible.tsx'
 import CardDetailsCollapsible from '@/components/cards-manager/card-details-collapsible.tsx'
+import CardSection from '@/components/cards-manager/card-section.tsx'
 
 export default function CardManagerTab() {
 
-  const cardData = useSelector((state: RootState) => state.card.cards)
+  const cardData = useSelector((state: RootState) => state.card.cardsDetails)
   const creditCardDetails = useMemo(() => cardData.filter((res: CardState) => res.cardType === 'credit'), [cardData])
   const debitCardDetails = useMemo(() => cardData.filter((res: CardState) => res.cardType === 'debit'), [cardData])
 
-  console.log({ creditCardDetails })
-  console.log({ debitCardDetails })
-  // const dispatch = useDispatch()
-  // const cardDetails = [
-  //
-  //   {
-  //     id: 1,
-  //     cardOwner: 'John Doe',
-  //     cardNumber: '**** **** **** 1234',
-  //     validOn: '12/23',
-  //     cardProvider: 'Visa',
-  //     cvv: '123',
-  //     cardProviderBank: 'Bank of America',
-  //     cardProviderBankLogo: hdfc_bank,
-  //     cardProviderLogo: master_card,
-  //     isCardLocked: false,
-  //     isCardArchived: false,
-  //     isCardDefault: false,
-  //     isAddToGPay: false,
-  //     cardType: 'credit',
-  //   },
-  //
-  //
-  //   {
-  //     id: 2,
-  //     cardOwner: 'John Doe',
-  //     cardNumber: '**** **** **** 1234',
-  //     validOn: '12/23',
-  //     cardProvider: 'Visa',
-  //     cvv: '123',
-  //     cardProviderBank: 'Bank of America',
-  //     cardProviderBankLogo: hdfc_bank,
-  //     cardProviderLogo: master_card,
-  //     isCardLocked: false,
-  //     isCardArchived: false,
-  //     isCardDefault: false,
-  //     isAddToGPay: false,
-  //     cardType: 'debit',
-  //   },
-  // ]
+
   return <div className={'card-manager-tab-content w-full px-[39px] py-[34px] font-montserrat flex gap-[38px]'}>
     <div className={'card-stats w-[35%] flex flex-col gap-[23px]'}>
 
@@ -76,6 +38,8 @@ export default function CardManagerTab() {
 
     </div>
     <div className={'w-full'}>
+      <CardSection title={'new card'} cards={creditCardDetails} />
+      <CardSection title={'new card'} cards={debitCardDetails} />
       <div className={'card-manger w-full'}>
         <div className={'h-[66px] w-full flex items-end'}>
           <div className={'h-[33px] border-b-2 border-[#0fa1db] text-[20px] text-[#0FA1DB] font-semibold'}>
