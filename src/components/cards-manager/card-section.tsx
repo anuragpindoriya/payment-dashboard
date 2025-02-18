@@ -90,11 +90,17 @@ const CardSection = ({ title, cards }: { title: string; cards: CardState[] }) =>
                       className="text-[16px] font-normal font-inria-sans flex items-center gap-[4px]">{renderCardNumber(card?.cardNumber)}</div>
                   </div>
                   <div className="flex justify-between items-end">
-                    <div className="text-[12px] font-bold">Valid Till: {card.expiryDate}</div>
+                    <div className="text-[12px] flex gap-[10px]">
+                      <span className={'font-bold'}>Valid Till:</span>
+                      <span> {card.expiryDate}</span>
+                    </div>
                     <div
-                      className="text-[12px] font-bold flex items-center gap-[4px]">CVV: {[...Array(3)].map((_, i) => (
-                      <div key={i} className="bg-white rounded-full w-[6px] h-[6px]" />
-                    ))}</div>
+                      className="text-[12px] font-bold flex gap-[10px]"><span>CVV: </span>
+                      <div className={'flex items-center gap-[3px]'}>
+                        {[...Array(3)].map((_, i) => (
+                          <div key={i} className="bg-white rounded-full w-[6px] h-[6px]" />
+                        ))}</div>
+                    </div>
                     <img src={card?.cardProviderLogo} alt="master_card" className="h-[39px]" />
                   </div>
                 </div>
