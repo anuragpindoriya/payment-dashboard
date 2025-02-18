@@ -34,7 +34,6 @@ export interface CardsSliceState {
   transactions: TransactionsState[];
 }
 
-
 const initialState: CardsSliceState = {
   cardsDetails: [
     {
@@ -70,7 +69,7 @@ const initialState: CardsSliceState = {
       cardType: 'credit',
     },
     {
-      id: 1,
+      id: 3,
       cardOwner: 'John Doe',
       cardNumber: '**** **** **** 1234',
       expiryDate: '12/23',
@@ -106,7 +105,11 @@ const initialState: CardsSliceState = {
       description: 'Ticket Refund',
     },
   ],
+}
 
+interface CardActionPayload {
+  id: number;
+  property: keyof Pick<CardState, 'isCardLocked' | 'isCardArchived' | 'isCardDefault' | 'isAddToGPay'>;
 }
 
 export const cardSlice = createSlice({
@@ -117,9 +120,15 @@ export const cardSlice = createSlice({
       const newId = state.cardsDetails.length + 1
       state.cardsDetails.push({ ...action.payload, id: newId })
     },
+    cardAction: (state, action: PayloadAction<CardActionPayload>) => {
+      const card = state.cardsDetails.find((c) => c.id === action.payload.id)
+      if (card) {
+        card[action.payload.property] = !card[action.payload.property]
+      }
+    },
   },
 })
 
-export const { addCard } = cardSlice.actions
+export const { addCard, cardAction } = cardSlice.actions
 
 export default cardSlice.reducer

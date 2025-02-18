@@ -62,7 +62,7 @@ const CardSection = ({ title, cards }: { title: string; cards: CardState[] }) =>
           </CarouselContent>
         </Carousel>
       </div>
-      <CardActions cards={cards[currentIndex]} />
+      <CardActions card={cards[currentIndex]} />
     </div>
   </div>
 }
