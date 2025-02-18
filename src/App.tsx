@@ -13,7 +13,7 @@ import { useState } from 'react'
 
 function App() {
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   return (
     <>
