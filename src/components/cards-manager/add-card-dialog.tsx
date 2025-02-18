@@ -53,6 +53,8 @@ const formSchema = z.object({
   isAddToGPay: z.boolean().optional(),
 })
 
+type FormValues = z.infer<typeof formSchema>
+
 export default function AddCardDialog() {
   const [modelOpen, setModelOpen] = useState(false)
   const dispatch = useDispatch()
@@ -83,7 +85,7 @@ export default function AddCardDialog() {
     })
   }
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: FormValues) {
     console.log(values)
     closeModel()
     dispatch(addCard({
