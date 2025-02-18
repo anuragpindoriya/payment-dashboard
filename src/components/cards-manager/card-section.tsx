@@ -22,7 +22,7 @@ const CardSection = ({ title, cards }: { title: string; cards: CardState[] }) =>
       setCurrentIndex(api.selectedScrollSnap())
     })
   }, [api])
-  console.log(currentIndex)
+  
   return <div className="w-full">
     <div className="h-[66px] w-full flex items-end">
       <div className="h-[33px] border-b-2 border-[#0fa1db] text-[20px] text-[#0FA1DB] font-semibold">
