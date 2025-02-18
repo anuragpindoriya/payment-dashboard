@@ -1,6 +1,6 @@
 import { CardState } from '@/components/cards-manager/card-slice.ts'
 import { Button } from '../ui/button'
-import { Eye } from 'lucide-react'
+import { Archive, Check, Eye, Lock } from 'lucide-react'
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel.tsx'
 import gpay_card from '@/assets/images/gpay_card.png'
 import CardActions from '@/components/cards-manager/card-action.tsx'
@@ -68,7 +68,7 @@ const CardSection = ({ title, cards }: { title: string; cards: CardState[] }) =>
     <div className="flex gap-[41px] pt-[15px]">
       <div className="w-[340px] flex flex-col gap-[8px]">
         <div className="flex justify-end">
-          <Button className="text-[12px] text-[#0C3F62] bg-[#0FA1DB30] hover:bg-[#0FA1DB30] px-[6px] py-[3px] h-fit"
+          <Button className={`text-[12px] text-[#0C3F62]  bg-[#0FA1DB30] hover:bg-[#0FA1DB30] px-[6px] py-[3px] h-fit`}
                   onClick={() => setShowCardNumber(!showCardNumber)}>
             <Eye width={'12px'} height={'12px'} className="inline-block" />
             <span className="ml-[5px] inline-block">{showCardNumber ? 'Hide Card Number' : 'Show Card Number'}</span>
@@ -79,9 +79,15 @@ const CardSection = ({ title, cards }: { title: string; cards: CardState[] }) =>
             {cards.map((card, index) => (
               <CarouselItem key={index}>
                 <div
-                  className="w-[340px] h-[180px] rounded-[4px] bg-[#0C3F62] text-white px-[16px] pt-[20px] pb-[27px] flex flex-col gap-[8px]">
+                  className={`w-[340px] h-[180px] rounded-[4px] bg-[#0C3F62] text-white px-[16px] pt-[20px] pb-[27px] flex flex-col gap-[8px] ${card?.isAddToGPay ? 'bg-[#4086F4] ' : card.isCardLocked || card?.isCardArchived ? 'bg-[#6A94A5]' : card?.isCardDefault ? 'bg-[#0FA1DB]' : 'bg-[#0C3F62]'} relative`}>
                   <div className="flex justify-between">
-                    <img src={gpay_card} alt="bank_logo" className="h-[16px]" />
+                    {card?.isCardLocked && !card?.isAddToGPay &&
+                      <Lock width="14px" className={'absolute top-[10px] left-[14px]'} />}
+                    {card?.isCardArchived && !card?.isAddToGPay &&
+                      <Archive width="14px" className={'absolute top-[10px] left-[14px]'} />}
+                    {card?.isCardDefault && !card?.isAddToGPay &&
+                      <Check width="14px" className={'absolute top-[10px] left-[14px]'} />}
+                    {card?.isAddToGPay ? <img src={gpay_card} alt="bank_logo" className="h-[16px]" /> : <div></div>}
                     <img src={card?.cardProviderBankLogo} alt="bank_logo" className="h-[16px]" />
                   </div>
                   <div className="mt-[27px]">
