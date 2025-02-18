@@ -39,7 +39,7 @@ const initialState: CardsSliceState = {
     {
       id: 1,
       cardOwner: 'John Doe',
-      cardNumber: '**** **** **** 1234',
+      cardNumber: '1234123412341234',
       expiryDate: '12/23',
       cardProvider: 'Visa',
       cvv: '123',
@@ -55,7 +55,7 @@ const initialState: CardsSliceState = {
     {
       id: 2,
       cardOwner: 'John Doe',
-      cardNumber: '**** **** **** 1234',
+      cardNumber: '1234123412341234',
       expiryDate: '12/23',
       cardProvider: 'Visa',
       cvv: '123',
@@ -71,7 +71,7 @@ const initialState: CardsSliceState = {
     {
       id: 3,
       cardOwner: 'John Doe',
-      cardNumber: '**** **** **** 1234',
+      cardNumber: '1234123412341234',
       expiryDate: '12/23',
       cardProvider: 'Visa',
       cvv: '123',
