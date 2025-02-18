@@ -123,7 +123,22 @@ export const cardSlice = createSlice({
     cardAction: (state, action: PayloadAction<CardActionPayload>) => {
       const card = state.cardsDetails.find((c) => c.id === action.payload.id)
       if (card) {
-        card[action.payload.property] = !card[action.payload.property]
+        if (action.payload.property === 'isCardLocked' && !card[action.payload.property]) {
+          card[action.payload.property] = !card[action.payload.property]
+          card.isCardArchived = false
+          card.isCardDefault = false
+        } else if (action.payload.property === 'isCardArchived' && !card[action.payload.property]) {
+          card[action.payload.property] = !card[action.payload.property]
+          card.isCardLocked = false
+          card.isCardDefault = false
+        } else if (action.payload.property === 'isCardDefault' && !card[action.payload.property]) {
+          card[action.payload.property] = !card[action.payload.property]
+          card.isCardLocked = false
+          card.isCardArchived = false
+        } else {
+          card[action.payload.property] = !card[action.payload.property]
+        }
+
       }
     },
   },
