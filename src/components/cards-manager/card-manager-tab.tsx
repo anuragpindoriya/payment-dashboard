@@ -1,17 +1,27 @@
-import { useState } from 'react'
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
+import { useMemo } from 'react'
 import { Button } from '@/components/ui/button.tsx'
-import { Archive, Check, ChevronDown, Eye, LayoutGrid, Lock, Settings2, Upload } from 'lucide-react'
+import { Archive, Check, Eye, LayoutGrid, Lock, Settings2 } from 'lucide-react'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel.tsx'
 import master_card from '@/assets/images/master_card.png'
 import hdfc_bank from '@/assets/images/hdfc_bank.png'
 import gpay from '@/assets/images/gpay.png'
 import gpay_card from '@/assets/images/gpay_card.png'
+import { RootState } from '@/store.ts'
+import { useSelector } from 'react-redux'
+import { CardState } from '@/components/cards-manager/card-slice.ts'
+import CardStatesCollapsible from '@/components/cards-manager/card-states-collapsible.tsx'
+import CardTransactionsCollapsible from '@/components/cards-manager/card-transactions-collapsible.tsx'
+import CardDetailsCollapsible from '@/components/cards-manager/card-details-collapsible.tsx'
 
 export default function CardManagerTab() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isTransetionCollapseOpen, setIsTransetionCollapseOpen] = useState(false)
 
+  const cardData = useSelector((state: RootState) => state.card.cards)
+  const creditCardDetails = useMemo(() => cardData.filter((res: CardState) => res.cardType === 'credit'), [cardData])
+  const debitCardDetails = useMemo(() => cardData.filter((res: CardState) => res.cardType === 'debit'), [cardData])
+
+  console.log({ creditCardDetails })
+  console.log({ debitCardDetails })
+  // const dispatch = useDispatch()
   // const cardDetails = [
   //
   //   {
@@ -51,133 +61,19 @@ export default function CardManagerTab() {
   // ]
   return <div className={'card-manager-tab-content w-full px-[39px] py-[34px] font-montserrat flex gap-[38px]'}>
     <div className={'card-stats w-[35%] flex flex-col gap-[23px]'}>
-      <Collapsible
-        open={isOpen}
-        onOpenChange={setIsOpen}
-        className="max-w-[366px] min-w-[343px] space-y-2"
-      >
 
+      <CardStatesCollapsible
+        icon={<LayoutGrid width={'16px'} height={'16px'} />}
+        displayName={'Card Details'}>
+        <CardDetailsCollapsible />
+      </CardStatesCollapsible>
 
-        <CollapsibleTrigger asChild>
-          <Button variant="ghost" size="sm"
-                  className={'w-full flex justify-between h-[66px] bg-[#F8F8F8] hover:bg-[#F8F8F8]/70 px-[24px] text-[#0FA1DB] hover:text-[#0FA1DB] font-montserrat'}>
-            <div className="text-[14px] font-montserrat flex gap-[15px] font-medium items-center">
-              <LayoutGrid width={'16px'} height={'16px'} />
-              Card Details
-            </div>
-            <div className={'rounded-full bg-[#C2E2EE] w-[18px] h-[18px] flex justify-center items-center'}>
-              <ChevronDown className="h-4 w-4" />
-              <span className="sr-only">Toggle</span>
-            </div>
+      <CardStatesCollapsible
+        icon={<Settings2 width={'16px'} height={'16px'} />}
+        displayName={'Today’s Transactions'}>
+        <CardTransactionsCollapsible />
+      </CardStatesCollapsible>
 
-          </Button>
-        </CollapsibleTrigger>
-
-
-        <CollapsibleContent className="space-y-2">
-          <div className={'border-x-1 border-[#6A94A5] border-b-1 flex flex-col'}>
-            <div className={'h-[84px] px-[23px] pt-[19px] flex justify-between pb-[23px]'}>
-              <div className={'flex gap-[16px]'}>
-                <div className={'rounded-full bg-[#C2E2EE] w-[40px] h-[40px] flex justify-center items-center'}>
-                  <Upload width={'16px'} className={'text-[#0FA1DB]'} />
-                </div>
-                <div className={'font-montserrat'}>
-                  <div className={'text-[#0C3F62] text-[14px] font-medium'}>Ordered Food</div>
-                  <div className={'text-[#6A94A5] text-[12px] font-medium pt-[2px]'}>20th May 2022</div>
-                  <div className={'text-[#0FA1DB] text-[12px] font-medium pt-[5px]'}>Charges applied on credit card
-                  </div>
-                </div>
-              </div>
-              <div className={'text-[#D12626] text-[12px]'}>
-                -$ 150.00
-              </div>
-            </div>
-            <hr className="h-[1px] border-t-0 bg-[#0FA1DB] flex mt-[9px] w-[80%] items-center mx-auto" />
-            <div className={'h-[84px] px-[23px] pt-[19px] flex justify-between pb-[23px]'}>
-              <div className={'flex gap-[16px]'}>
-                <div className={'rounded-full bg-[#C2E2EE] w-[40px] h-[40px] flex justify-center items-center'}>
-                  <Upload width={'16px'} className={'text-[#0FA1DB]'} />
-                </div>
-                <div className={'font-montserrat'}>
-                  <div className={'text-[#0C3F62] text-[14px] font-medium'}>Ordered Food</div>
-                  <div className={'text-[#6A94A5] text-[12px] font-medium pt-[2px]'}>20th May 2022</div>
-                  <div className={'text-[#0FA1DB] text-[12px] font-medium pt-[5px]'}>Charges applied on credit card
-                  </div>
-                </div>
-              </div>
-              <div className={'text-[#D12626] text-[12px]'}>
-                -$ 150.00
-              </div>
-            </div>
-            <hr className="h-[1px] border-t-0 bg-[#0FA1DB] flex mt-[9px] w-[80%] items-center mx-auto" />
-
-          </div>
-        </CollapsibleContent>
-      </Collapsible>
-
-      <Collapsible
-        open={isTransetionCollapseOpen}
-        onOpenChange={setIsTransetionCollapseOpen}
-        className="max-w-[366px] min-w-[343px] space-y-2"
-      >
-
-
-        <CollapsibleTrigger asChild>
-          <Button variant="ghost" size="sm"
-                  className={'w-full flex justify-between h-[66px] bg-[#F8F8F8] hover:bg-[#F8F8F8]/70 px-[24px] text-[#0FA1DB] hover:text-[#0FA1DB] font-montserrat'}>
-            <div className="text-[14px] font-montserrat flex gap-[15px] font-medium items-center">
-              <Settings2 width={'16px'} height={'16px'} />
-              Today’s Transactions
-            </div>
-            <div className={'rounded-full bg-[#C2E2EE] w-[18px] h-[18px] flex justify-center items-center'}>
-              <ChevronDown className="h-4 w-4" />
-              <span className="sr-only">Toggle</span>
-            </div>
-
-          </Button>
-        </CollapsibleTrigger>
-
-
-        <CollapsibleContent className="space-y-2">
-          <div className={'border-x-1 border-[#6A94A5] border-b-1 flex flex-col'}>
-            <div className={'h-[84px] px-[23px] pt-[19px] flex justify-between pb-[23px]'}>
-              <div className={'flex gap-[16px]'}>
-                <div className={'rounded-full bg-[#C2E2EE] w-[40px] h-[40px] flex justify-center items-center'}>
-                  <Upload width={'16px'} className={'text-[#0FA1DB]'} />
-                </div>
-                <div className={'font-montserrat'}>
-                  <div className={'text-[#0C3F62] text-[14px] font-medium'}>Ordered Food</div>
-                  <div className={'text-[#6A94A5] text-[12px] font-medium pt-[2px]'}>20th May 2022</div>
-                  <div className={'text-[#0FA1DB] text-[12px] font-medium pt-[5px]'}>Charges applied on credit card
-                  </div>
-                </div>
-              </div>
-              <div className={'text-[#D12626] text-[12px]'}>
-                -$ 150.00
-              </div>
-            </div>
-            <hr className="h-[1px] border-t-0 bg-[#0FA1DB] flex mt-[9px] w-[80%] items-center mx-auto" />
-            <div className={'h-[84px] px-[23px] pt-[19px] flex justify-between pb-[23px]'}>
-              <div className={'flex gap-[16px]'}>
-                <div className={'rounded-full bg-[#C2E2EE] w-[40px] h-[40px] flex justify-center items-center'}>
-                  <Upload width={'16px'} className={'text-[#0FA1DB]'} />
-                </div>
-                <div className={'font-montserrat'}>
-                  <div className={'text-[#0C3F62] text-[14px] font-medium'}>Ordered Food</div>
-                  <div className={'text-[#6A94A5] text-[12px] font-medium pt-[2px]'}>20th May 2022</div>
-                  <div className={'text-[#0FA1DB] text-[12px] font-medium pt-[5px]'}>Charges applied on credit card
-                  </div>
-                </div>
-              </div>
-              <div className={'text-[#D12626] text-[12px]'}>
-                -$ 150.00
-              </div>
-            </div>
-            <hr className="h-[1px] border-t-0 bg-[#0FA1DB] flex mt-[9px] w-[80%] items-center mx-auto" />
-
-          </div>
-        </CollapsibleContent>
-      </Collapsible>
     </div>
     <div className={'w-full'}>
       <div className={'card-manger w-full'}>
