@@ -137,7 +137,8 @@ export default function AddCardDialog() {
   return (
     <Dialog open={modelOpen} onOpenChange={setModelOpen}>
       <DialogTrigger asChild>
-        <Button variant={'pd-default'} className={'font-montserrat'} onClick={() => setModelOpen(true)}>
+        <Button variant={'pd-default'} className={'font-montserrat px-[6px] py-[3px] h-fit'}
+                onClick={() => setModelOpen(true)}>
           <Plus className={'w-[12px]'} /> Add Card
         </Button>
       </DialogTrigger>
