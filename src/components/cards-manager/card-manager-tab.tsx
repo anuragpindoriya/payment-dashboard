@@ -15,8 +15,9 @@ export default function CardManagerTab() {
   const debitCardDetails = useMemo(() => cardData.filter((res: CardState) => res.cardType === 'debit'), [cardData])
 
 
-  return <div className={'card-manager-tab-content w-full px-[39px] py-[34px] font-montserrat flex gap-[38px]'}>
-    <div className={'card-stats w-[35%] flex flex-col gap-[23px]'}>
+  return <div
+    className={'card-manager-tab-content w-full px-[15px] sm:px-[20px] md:px-[27px] lg:px-[39px] py-[34px] font-montserrat flex flex-col lg:flex-row gap-[38px]'}>
+    <div className={'card-stats w-[100%] lg:w-[35%] flex flex-col gap-[23px]'}>
 
       <CardStatesCollapsible
         icon={<LayoutGrid width={'16px'} height={'16px'} />}

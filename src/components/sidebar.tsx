@@ -1,4 +1,5 @@
 import logo from '../assets/images/logo.png'
+import { CreditCard, House, LogOut, Settings, Settings2 } from 'lucide-react'
 
 interface SidebarProps {
   isSidebarOpen: boolean;
@@ -14,24 +15,24 @@ export default function Sidebar({ isSidebarOpen }: SidebarProps) {
           Umbraco Gold Partner
         </div>
         <ul className="text-white text-sm list-none m-0 p-0">
-          <li className="font-bold pt-3 pb-3 border-b-1 border-b-[#6a94a5]"><a href=""
-                                                                               className="flex items-center"><img
-            src={logo} className="w-4 mr-1" alt="" />Home</a></li>
-          <li className="font-bold pt-3 pb-3 border-b-1 border-b-[#6a94a5]"><a href=""
-                                                                               className="flex items-center"><img src=""
-                                                                                                                  className="w-4 mr-1"
-                                                                                                                  alt="" />Cards</a>
+          <li className="font-bold pt-3 pb-3 border-b-1 border-b-[#6a94a5]">
+            <a href="" className="flex items-center">
+              <House className={'mr-1'} width={'17px'} />Home</a>
+          </li>
+          <li className="font-bold pt-3 pb-3 border-b-1 border-b-[#6a94a5] text-[#0FA1DB]"><a href=""
+                                                                                              className="flex items-center"><CreditCard
+            className={'mr-1'} width={'17px'} />Cards</a>
           </li>
           <li className="font-bold pt-3 pb-3 border-b-1 border-b-[#6a94a5]"><a href=""
-                                                                               className="flex items-center"><img src=""
-                                                                                                                  className="w-4 mr-1"
-                                                                                                                  alt="" />Transaction</a>
+                                                                               className="flex items-center"><Settings2
+            className={'mr-1'} width={'17px'} />Transaction</a>
           </li>
-          <li className="font-bold pt-3 pb-3 "><a href="" className="flex items-center"><img src="" className="w-4 mr-1"
-                                                                                             alt="" />Settings</a></li>
+          <li className="font-bold pt-3 pb-3 "><a href="" className="flex items-center"><Settings className={'mr-1'}
+                                                                                                  width={'17px'} />Settings</a>
+          </li>
         </ul>
-        <div className="grow flex items-end w-full text-white text-base font-bold"><img src="" className="w-4 mr-1"
-                                                                                        alt="" />Logout
+        <div className="grow flex items-end w-full text-white text-base font-bold"><LogOut className={'mr-1'}
+                                                                                           width={'17px'} />Logout
         </div>
       </div>
     </div>
