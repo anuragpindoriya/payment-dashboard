@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button.tsx'
-import { AlignJustify } from 'lucide-react'
+import { AlignJustify, ChevronDown } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar.tsx'
 
 
@@ -10,17 +10,21 @@ interface NavbarProps {
 
 export default function Navbar({ isSidebarOpen, setIsSidebarOpen }: NavbarProps) {
   return <>
-    <div className={'w-full flex items-center justify-between px-6 py-4'}>
-      <div className={'flex items-center gap-4'}>
-        <Button variant="ghost" className="cursor-pointer"
-                onClick={() => setIsSidebarOpen(!isSidebarOpen)}><AlignJustify /></Button>
-        <span>Cards</span>
+    <div className={'w-full flex items-center justify-between px-6 py-4 text-[#6A94A5]'}>
+      <div className={'flex items-center gap-[16px] '}>
+        <Button
+          variant="ghost" className="cursor-pointer p-0"
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+          <AlignJustify size={36} />
+        </Button>
+        <span className={'text-[16px] font-bold'}>Cards</span>
       </div>
-      <div>
+      <div className={'flex items-center gap-[2px]'}>
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
+        <ChevronDown />
       </div>
     </div>
   </>
