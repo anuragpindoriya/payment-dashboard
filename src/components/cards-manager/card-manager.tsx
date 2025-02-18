@@ -10,7 +10,7 @@ export default function CardManager() {
     setActiveTab(index)
   }
   return (
-    <div className={'bg-white mx-[34px]'}>
+    <div className={'bg-white md:mx-[34px] sm:mx-[20px] mx-[10px]'}>
       <div className={'w-full bg-white px-6 pt-[10px] mt-[24px] flex justify-between font-montserrat'}
            style={{ boxShadow: '0px 1px 2px 0px #6A94A5' }}>
         <div className={'flex gap-4 self-end'}>
