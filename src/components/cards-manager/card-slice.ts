@@ -118,7 +118,11 @@ export const cardSlice = createSlice({
   reducers: {
     addCard: (state, action: PayloadAction<CardState>) => {
       const newId = state.cardsDetails.length + 1
-      state.cardsDetails.push({ ...action.payload, id: newId })
+      state.cardsDetails.push({
+        ...action.payload, id: newId,
+        isCardLocked: false,
+        isCardArchived: false,
+      })
     },
     cardAction: (state, action: PayloadAction<CardActionPayload>) => {
       const card = state.cardsDetails.find((c) => c.id === action.payload.id)

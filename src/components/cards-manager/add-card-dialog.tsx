@@ -8,7 +8,11 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Plus, X } from 'lucide-react'
-import { ChangeEvent, KeyboardEvent, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addCard } from '@/components/cards-manager/card-slice.ts'
+import master_card from '@/assets/images/master_card.png'
+import hdfc_bank from '@/assets/images/hdfc_bank.png'
+import { ChangeEvent, useEffect, useMemo, useState } from 'react'
 
 const isValidCardNumber = (cardNumber: string) => {
   let sum = 0, alternate = false
@@ -25,53 +29,84 @@ const isValidCardNumber = (cardNumber: string) => {
   }
   return sum % 10 === 0
 }
-
+// 3987010348330002
 const formSchema = z.object({
-  name: z.string().min(2, { message: 'Required' }).max(35, { message: 'Max 35 characters allowed' }),
-  bankName: z.string().min(2, { message: 'Required' }),
+  cardOwner: z.string().min(2, { message: 'Required' }).max(35, { message: 'Max 35 characters allowed' }),
+  cardProviderBank: z.string().min(2, { message: 'Required' }),
   cardType: z.enum(['credit', 'debit'], { message: 'Select a Card Type' }),
   cardNumber: z.string().refine(isValidCardNumber, { message: 'Invalid Card Number' }),
-  expiry: z.string().regex(/^(0[1-9]|1[0-2])\/\d{2}$/, { message: 'Invalid format (MM/YY)' }).refine(
-    (date) => {
+  expiryDate: z
+    .string()
+    .regex(/^(0[1-9]|1[0-2])\/\d{2}$/, { message: 'Invalid format (MM/YY)' })
+    .refine((date) => {
       const [month, year] = date.split('/').map(Number)
       const currentYear = new Date().getFullYear() % 100
       const currentMonth = new Date().getMonth() + 1
-      return year > currentYear || (year === currentYear && month >= currentMonth)
-    },
-    { message: 'Date must be in the future' },
-  ),
+
+      if (year < currentYear) return false // Year must be in the future
+      if (year === currentYear && month < currentMonth) return false // If same year, month must be in the future
+
+      return true
+    }, { message: 'Expiry date must be in the future' }),
   cvv: z.string().length(3, { message: 'CVV must be 3 digits' }),
-  setDefault: z.boolean().optional(),
-  addToGPay: z.boolean().optional(),
+  isCardDefault: z.boolean().optional(),
+  isAddToGPay: z.boolean().optional(),
 })
 
 export default function AddCardDialog() {
   const [modelOpen, setModelOpen] = useState(false)
+  const dispatch = useDispatch()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-      bankName: '',
+    defaultValues: useMemo(() => ({
+      cardOwner: '',
+      cardProviderBank: 'HDFC Bank',
       cardType: undefined,
       cardNumber: '',
-      expiry: '',
+      expiryDate: '',
       cvv: '',
-      setDefault: false,
-      addToGPay: false,
-    },
+      isCardDefault: false,
+      isAddToGPay: false,
+    }), []),
   })
   const closeModel = () => {
     setModelOpen(false)
-    form.reset()
+    form.reset({
+      cardOwner: '',
+      cardProviderBank: 'HDFC Bank',
+      cardType: undefined,
+      cardNumber: '',
+      expiryDate: '',
+      cvv: '',
+      isCardDefault: false,
+      isAddToGPay: false,
+    })
   }
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
     closeModel()
-
+    dispatch(addCard({
+      ...values,
+      id: Date.now(),
+      // cardProvider: 'Visa',
+      cardProviderBankLogo: hdfc_bank,
+      cardProviderLogo: master_card,
+      isCardLocked: false,
+      isCardArchived: false,
+    }))
   }
 
   const [expiry, setExpiry] = useState('')
+
+  useEffect(() => {
+      if (modelOpen) {
+        form.setValue('cardProviderBank', 'HDFC Bank', { shouldValidate: true })
+      }
+      form.reset()
+      setExpiry('')
+    }
+    , [form, modelOpen])
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     let value = e.target.value.replace(/\D/g, '') // Remove non-numeric characters
@@ -83,6 +118,8 @@ export default function AddCardDialog() {
     }
 
     setExpiry(value)
+
+    form.setValue('expiryDate', value, { shouldValidate: true })
   }
 
   function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
@@ -111,7 +148,7 @@ export default function AddCardDialog() {
             <div className={'space-y-4 px-[30px] font-montserrat'}>
               <FormField
                 control={form.control}
-                name="name"
+                name="cardOwner"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Name:</FormLabel>
@@ -125,12 +162,12 @@ export default function AddCardDialog() {
 
               <FormField
                 control={form.control}
-                name="bankName"
+                name="cardProviderBank"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Bank Name:</FormLabel>
                     <FormControl>
-                      <Input placeholder="i.e. HDFC BANK" {...field} value={'HDFC Bank'} disabled
+                      <Input placeholder="i.e. HDFC BANK" {...field} value="HDFC Bank" readOnly
                              className={'rounded-[3px]'} />
                     </FormControl>
                     <FormMessage />
@@ -178,7 +215,7 @@ export default function AddCardDialog() {
               <div className="grid grid-cols-2 gap-4 items-start">
                 <FormField
                   control={form.control}
-                  name="expiry"
+                  name="expiryDate"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Valid Till:</FormLabel>
@@ -212,9 +249,9 @@ export default function AddCardDialog() {
 
               <FormField
                 control={form.control}
-                name="setDefault"
+                name="isCardDefault"
                 render={({ field }) => (
-                  <FormItem className="flex flex-row items-start ">
+                  <FormItem className="flex flex-row items-start">
                     <FormControl>
                       <Checkbox onCheckedChange={field.onChange} checked={field.value} />
                     </FormControl>
@@ -225,7 +262,7 @@ export default function AddCardDialog() {
 
               <FormField
                 control={form.control}
-                name="addToGPay"
+                name="isAddToGPay"
                 render={({ field }) => (
                   <FormItem className="flex flex-row items-start">
                     <FormControl>
