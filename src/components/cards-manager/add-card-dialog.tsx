@@ -7,7 +7,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Plus } from 'lucide-react'
+import { Plus, X } from 'lucide-react'
 import { ChangeEvent, KeyboardEvent, useState } from 'react'
 
 const isValidCardNumber = (cardNumber: string) => {
@@ -95,144 +95,152 @@ export default function AddCardDialog() {
   return (
     <Dialog open={modelOpen} onOpenChange={setModelOpen}>
       <DialogTrigger asChild>
-        <Button variant={'pd-default'} className={''} onClick={() => setModelOpen(true)}>
+        <Button variant={'pd-default'} className={'font-montserrat'} onClick={() => setModelOpen(true)}>
           <Plus className={'w-[12px]'} /> Add Card
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[450px]" disableModelCloseButton>
-        <DialogHeader>
-          <DialogTitle className="text-lg font-medium">New Card</DialogTitle>
+      <DialogContent className="sm:max-w-[450px] p-0 rounded-[3px]" disableModelCloseButton>
+        <DialogHeader className={'px-[15px] py-[12px] shadow-[0_2px_5px_rgba(0,_0,_0,_0.36)]'}>
+          <DialogTitle className="text-lg font-medium flex justify-between font-montserrat">
+            <div>New Card</div>
+            <Button variant={'ghost'} onClick={closeModel}><X height={'10px'} width={'12px'} /></Button>
+          </DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name:</FormLabel>
-                  <FormControl>
-                    <Input placeholder="i.e. James Carlon" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="bankName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Bank Name:</FormLabel>
-                  <FormControl>
-                    <Input placeholder="i.e. HDFC BANK" {...field} value={'HDFC Bank'} disabled />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="cardType"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Card Type:</FormLabel>
-                  <Select onValueChange={field.onChange}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select Card Type" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="credit">Credit Card</SelectItem>
-                      <SelectItem value="debit">Debit Card</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="cardNumber"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Card Number:</FormLabel>
-                  <FormControl>
-                    <Input placeholder="i.e. 7754 1542 6584 4875" maxLength={19} {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div className="grid grid-cols-2 gap-4 items-start">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <div className={'space-y-4 px-[30px] font-montserrat'}>
               <FormField
                 control={form.control}
-                name="expiry"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Valid Till:</FormLabel>
+                    <FormLabel>Name:</FormLabel>
                     <FormControl>
-                      <Input placeholder="MM/YY" maxLength={5} {...field}
-                             onChange={handleChange}
-                             onKeyDown={handleKeyDown}
-                             value={expiry}
-                      />
+                      <Input placeholder="i.e. James Carlon" {...field} className={'rounded-[3px]'} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
-                name="cvv"
+                name="bankName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>CVV:</FormLabel>
+                    <FormLabel>Bank Name:</FormLabel>
                     <FormControl>
-                      <Input type={'password'} placeholder="_ _ _" maxLength={3} {...field} />
+                      <Input placeholder="i.e. HDFC BANK" {...field} value={'HDFC Bank'} disabled
+                             className={'rounded-[3px]'} />
                     </FormControl>
                     <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="cardType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Card Type:</FormLabel>
+                    <Select onValueChange={field.onChange}>
+                      <FormControl>
+                        <SelectTrigger className={'rounded-[3px]'}>
+                          <SelectValue placeholder="Select Card Type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="credit">Credit Card</SelectItem>
+                        <SelectItem value="debit">Debit Card</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="cardNumber"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Card Number:</FormLabel>
+                    <FormControl>
+                      <Input placeholder="i.e. 7754 1542 6584 4875" maxLength={19} {...field}
+                             className={'rounded-[3px]'} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="grid grid-cols-2 gap-4 items-start">
+                <FormField
+                  control={form.control}
+                  name="expiry"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Valid Till:</FormLabel>
+                      <FormControl>
+                        <Input placeholder="MM/YY" maxLength={5} {...field}
+                               onChange={handleChange}
+                               onKeyDown={handleKeyDown}
+                               value={expiry}
+                               className={'rounded-[3px]'}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="cvv"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>CVV:</FormLabel>
+                      <FormControl>
+                        <Input type={'password'} placeholder="_ _ _" maxLength={3} {...field}
+                               className={'rounded-[3px]'} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <FormField
+                control={form.control}
+                name="setDefault"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start ">
+                    <FormControl>
+                      <Checkbox onCheckedChange={field.onChange} checked={field.value} />
+                    </FormControl>
+                    <FormLabel className={'text-[12px]'}>Set this card as Default</FormLabel>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="addToGPay"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start">
+                    <FormControl>
+                      <Checkbox onCheckedChange={field.onChange} checked={field.value} />
+                    </FormControl>
+                    <FormLabel className={'text-[12px]'}>Add this card to GPay?</FormLabel>
                   </FormItem>
                 )}
               />
             </div>
-
-            <FormField
-              control={form.control}
-              name="setDefault"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-2">
-                  <FormControl>
-                    <Checkbox onCheckedChange={field.onChange} checked={field.value} />
-                  </FormControl>
-                  <FormLabel>Set this card as Default</FormLabel>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="addToGPay"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-2">
-                  <FormControl>
-                    <Checkbox onCheckedChange={field.onChange} checked={field.value} />
-                  </FormControl>
-                  <FormLabel>Add this card to GPay?</FormLabel>
-                </FormItem>
-              )}
-            />
-
-            <DialogFooter>
-              <Button type="button" variant="outline" onClick={closeModel}>
+            <DialogFooter className={'border-t-[1px] border-[#6A94A5A6] pt-[14px] pb-[16px] px-[29px]'}>
+              <Button type="button" variant="outline" onClick={closeModel} className={'rounded-[3px] bg-[#C2E2EE66]'}>
                 Cancel
               </Button>
-              <Button type="submit">Submit</Button>
+              <Button type="submit" className={'rounded-[3px] bg-[#0C3F62]'}>Submit</Button>
             </DialogFooter>
           </form>
         </Form>
