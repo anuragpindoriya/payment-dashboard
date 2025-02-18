@@ -18,13 +18,17 @@ const CardSection = ({ title, cards }: { title: string; cards: CardState[] }) =>
       return
     }
 
-    setCount(api.scrollSnapList().length)
+    // setCount(api.scrollSnapList().length)
     setCurrentIndex(api.selectedScrollSnap())
 
     api.on('select', () => {
       setCurrentIndex(api.selectedScrollSnap())
     })
   }, [api])
+
+  useEffect(() => {
+    setCount(cards.length)
+  }, [cards.length])
 
   const onDotButtonClick = useCallback(
     (index: number) => {
