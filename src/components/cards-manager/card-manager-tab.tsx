@@ -221,16 +221,16 @@ export default function CardManagerTab() {
                             {`9 3 4 0 - 9 3 4 0 - 9 3 4 0 - 9 3 4 0`}
                           </div>
                         </div>
-                        <div className={'flex justify-between'}>
-                          <div className={'flex gap-[9px]'}>
+                        <div className={'flex justify-between items-end'}>
+                          <div className={'flex gap-[9px] items-end'}>
                             <div className={'text-[12px] font-bold'}>
                               Valid Till :
                             </div>
-                            <div className={'text-[12px] font-normal'}>
+                            <div className={'text-[12px] font-normal '}>
                               12/23
                             </div>
                           </div>
-                          <div className={'flex gap-[9px]'}>
+                          <div className={'flex gap-[9px] items-end'}>
 
                             <div className={'text-[12px] font-bold'}>
                               CVV :
@@ -330,8 +330,8 @@ export default function CardManagerTab() {
                             {`9 3 4 0 - 9 3 4 0 - 9 3 4 0 - 9 3 4 0`}
                           </div>
                         </div>
-                        <div className={'flex justify-between'}>
-                          <div className={'flex gap-[9px]'}>
+                        <div className={'flex justify-between items-end'}>
+                          <div className={'flex gap-[9px] items-end'}>
                             <div className={'text-[12px] font-bold'}>
                               Valid Till :
                             </div>
@@ -339,7 +339,7 @@ export default function CardManagerTab() {
                               12/23
                             </div>
                           </div>
-                          <div className={'flex gap-[9px]'}>
+                          <div className={'flex gap-[9px] items-end'}>
 
                             <div className={'text-[12px] font-bold'}>
                               CVV :
