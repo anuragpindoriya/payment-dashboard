@@ -1,0 +1,16 @@
+{
+  "entryPoints": [
+    "src"
+  ],
+  "out": "docs",
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.spec.ts"
+  ],
+  "tsconfig": "tsconfig.json",
+  "includeVersion": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeExternals": true,
+  "excludeNotDocumented": true
+}
