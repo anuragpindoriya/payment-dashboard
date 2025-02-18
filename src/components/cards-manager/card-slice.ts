@@ -26,16 +26,17 @@ export interface TransactionsState {
   amount: string,
   cardNumber: string
   id: number
+  description: string
 }
 
 export interface CardsSliceState {
-  cards: CardState[];
+  cardsDetails: CardState[];
   transactions: TransactionsState[];
 }
 
 
 const initialState: CardsSliceState = {
-  cards: [
+  cardsDetails: [
     {
       id: 1,
       cardOwner: 'John Doe',
@@ -85,14 +86,26 @@ const initialState: CardsSliceState = {
       cardType: 'debit',
     },
   ],
-  transactions: [{
-    transactionsType: 'credit',
-    date: '20th May 2022',
-    additionalInfo: 'Charges applied on credit card',
-    amount: '$ 150.50',
-    cardNumber: '',
-    id: 1,
-  }],
+  transactions: [
+    {
+      transactionsType: 'credit',
+      description: 'Ordered Food',
+      date: '20th May 2022',
+      additionalInfo: 'Charges applied on credit card',
+      amount: '$ 150.50',
+      cardNumber: '',
+      id: 1,
+    },
+    {
+      transactionsType: 'debit',
+      date: '20th May 2022',
+      additionalInfo: 'Charges applied on credit card',
+      amount: '$ 50.50',
+      cardNumber: '',
+      id: 2,
+      description: 'Ticket Refund',
+    },
+  ],
 
 }
 
@@ -101,8 +114,8 @@ export const cardSlice = createSlice({
   initialState,
   reducers: {
     addCard: (state, action: PayloadAction<CardState>) => {
-      const newId = state.cards.length + 1
-      state.cards.push({ ...action.payload, id: newId })
+      const newId = state.cardsDetails.length + 1
+      state.cardsDetails.push({ ...action.payload, id: newId })
     },
   },
 })
