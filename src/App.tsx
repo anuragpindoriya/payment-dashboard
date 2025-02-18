@@ -19,7 +19,7 @@ function App() {
     <>
 
       {/* sidebar */}
-      <Sidebar isSidebarOpen={isSidebarOpen} />
+      <Sidebar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
 
       <div
         className={`${!isSidebarOpen ? 'w-full' : 'w-[calc(100%-350px)] translate-x-[350px]'} transition-all duration-300 ease-in-out`}>
@@ -27,7 +27,7 @@ function App() {
         {/*create paper for bg*/}
         <div className={'bg-[#eceff1] w-full h-fit pt-[18px]'}>
           <div className={'text-[14px] text-[#0C3F62] font-normal'}>
-            <Breadcrumb className={'mx-[34px]'}>
+            <Breadcrumb className={'mx-[34px] pt-[68px]'}>
               <BreadcrumbList className={'text-[#0C3F62]'}>
                 <BreadcrumbItem>
                   <BreadcrumbLink href="/">Home</BreadcrumbLink>
