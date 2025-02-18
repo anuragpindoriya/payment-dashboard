@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux'
 import { addCard } from '@/components/cards-manager/card-slice.ts'
 import master_card from '@/assets/images/master_card.png'
 import hdfc_bank from '@/assets/images/hdfc_bank.png'
+import * as React from 'react'
 import { ChangeEvent, useEffect, useMemo, useState } from 'react'
 
 const isValidCardNumber = (cardNumber: string) => {
@@ -91,11 +92,13 @@ export default function AddCardDialog() {
     dispatch(addCard({
       ...values,
       id: Date.now(),
-      // cardProvider: 'Visa',
+      cardProvider: 'Master',
       cardProviderBankLogo: hdfc_bank,
       cardProviderLogo: master_card,
       isCardLocked: false,
       isCardArchived: false,
+      isCardDefault: values.isCardDefault ?? false,
+      isAddToGPay: values.isAddToGPay ?? false,
     }))
   }
 
@@ -124,7 +127,7 @@ export default function AddCardDialog() {
     form.setValue('expiryDate', value, { shouldValidate: true })
   }
 
-  function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Backspace' && expiry.length === 3) {
       setExpiry(expiry.slice(0, 2)) // Remove "/" when deleting YY
       e.preventDefault()
