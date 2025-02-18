@@ -1,5 +1,6 @@
 /*import "Montserrat", serif; font from google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
@@ -203,4 +204,5 @@ body {
 
 @theme{
     --font-montserrat: "Montserrat", serif;
+    --font-inria-sans: "inria sans", sans-serif;
 }

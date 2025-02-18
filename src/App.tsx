@@ -10,7 +10,7 @@ function App() {
       <Navbar></Navbar>
 
       {/*create paper for bg*/}
-      <div className={'bg-[#eceff1] w-full h-[calc(100vh-60px)] px-[34px] py-[18px]'}>
+      <div className={'bg-[#eceff1] w-full h-fit px-[34px] py-[18px]'}>
         <div className={'text-[14px] text-[#0C3F62] font-normal'}>
           home {'>'} cards
           <CardManager></CardManager>
