@@ -20,14 +20,16 @@ function App() {
 
       {/* sidebar */}
       <Sidebar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
-
       <div
         className={`${!isSidebarOpen ? 'w-full' : 'w-[calc(100%-350px)] translate-x-[350px]'} transition-all duration-300 ease-in-out`}>
+
+        {/* navbar */}
         <Navbar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
+
         {/*create paper for bg*/}
         <div className={'bg-[#eceff1] w-full h-fit pt-[18px]'}>
           <div className={'text-[14px] text-[#0C3F62] font-normal'}>
-            <Breadcrumb className={'mx-[34px] pt-[68px]'}>
+            <Breadcrumb className={'mx-[34px]'}>
               <BreadcrumbList className={'text-[#0C3F62]'}>
                 <BreadcrumbItem>
                   <BreadcrumbLink href="/">Home</BreadcrumbLink>
@@ -45,25 +47,6 @@ function App() {
           </div>
         </div>
       </div>
-      {/*<div className="[--header-height:calc(--spacing(14))]">*/}
-      {/*<SidebarProvider className="flex flex-col">*/}
-      {/*  <SiteHeader />*/}
-      {/*  <div className="flex flex-1">*/}
-      {/*    <AppSidebar />*/}
-      {/*    <SidebarInset>*/}
-      {/*      <div className="flex flex-1 flex-col gap-4 p-4">*/}
-      {/*        <div className="grid auto-rows-min gap-4 md:grid-cols-3">*/}
-      {/*          <div className="bg-muted/50 aspect-video rounded-xl" />*/}
-      {/*          <div className="bg-muted/50 aspect-video rounded-xl" />*/}
-      {/*          <div className="bg-muted/50 aspect-video rounded-xl" />*/}
-      {/*        </div>*/}
-      {/*        <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />*/}
-      {/*      </div>*/}
-      {/*    </SidebarInset>*/}
-      {/*  </div>*/}
-      {/*</SidebarProvider>*/}
-
-      {/*</div>*/}
     </>
   )
 }
