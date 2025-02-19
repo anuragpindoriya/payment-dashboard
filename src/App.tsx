@@ -27,7 +27,7 @@ function App() {
         {/*create paper for bg*/}
         <div className={'bg-[#eceff1] w-full h-fit pt-[18px]'}>
           <div className={'text-[14px] text-[#0C3F62] font-normal'}>
-            <Breadcrumb className={'mx-[34px] pt-[68px]'}>
+            <Breadcrumb className={'mx-[34px]'}>
               <BreadcrumbList className={'text-[#0C3F62]'}>
                 <BreadcrumbItem>
                   <BreadcrumbLink href="/">Home</BreadcrumbLink>

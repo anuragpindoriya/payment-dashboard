@@ -11,7 +11,7 @@ interface NavbarProps {
 export default function Navbar({ isSidebarOpen, setIsSidebarOpen }: NavbarProps) {
   return <>
     <div
-      className={'fixed top-0 left-0 w-full flex items-center justify-between px-6 py-4 text-[#6A94A5] bg-white shadow-md z-50'}>
+      className={'sticky top-0 left-0 w-full flex items-center justify-between px-6 py-4 text-[#6A94A5] bg-white shadow-md z-50'}>
       <div className={'flex items-center gap-[16px] '}>
         <Button
           variant="ghost" className="cursor-pointer p-0"
