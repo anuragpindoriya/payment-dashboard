@@ -5,12 +5,21 @@ import { cardAction, CardState } from '@/components/cards-manager/card-slice.ts'
 import { useDispatch } from 'react-redux'
 import { toast } from 'sonner'
 
+type ActionType = 'isCardLocked' | 'isCardArchived' | 'isCardDefault' | 'isAddToGPay'
+
+const messageList: Record<ActionType, { true: string, false: string }> = {
+  isCardLocked: { true: 'Card Locked', false: 'Card Unlocked' },
+  isCardArchived: { true: 'Card Archived', false: 'Card Unarchived' },
+  isCardDefault: { true: 'Card Set As Default', false: 'Card Not Set As Default' },
+  isAddToGPay: { true: 'Card Added to GPay', false: 'Card Removed from GPay' },
+}
+
 const CardActions = ({ card }: { card: CardState }) => {
   const dispatch = useDispatch()
 
-  const actionHandler = (card: CardState, actionType: keyof Pick<CardState, 'isCardLocked' | 'isCardArchived' | 'isCardDefault' | 'isAddToGPay'>) => {
-    console.log(`Action: ${actionType}`, card)
-    toast('Action performed successfully')
+  const actionHandler = (card: CardState, actionType: ActionType) => {
+    const currentState = card[actionType]
+    toast(messageList[actionType][String(currentState) as 'true' | 'false'])
     dispatch(cardAction({ id: card.id, property: actionType }))
   }
 
