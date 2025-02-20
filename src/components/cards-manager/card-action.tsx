@@ -8,10 +8,10 @@ import { toast } from 'sonner'
 type ActionType = 'isCardLocked' | 'isCardArchived' | 'isCardDefault' | 'isAddToGPay'
 
 const messageList: Record<ActionType, { true: string, false: string }> = {
-  isCardLocked: { true: 'Card Locked', false: 'Card Unlocked' },
-  isCardArchived: { true: 'Card Archived', false: 'Card Unarchived' },
-  isCardDefault: { true: 'Card Set As Default', false: 'Card Not Set As Default' },
-  isAddToGPay: { true: 'Card Added to GPay', false: 'Card Removed from GPay' },
+  isCardLocked: { false: 'Card Locked', true: 'Card Unlocked' },
+  isCardArchived: { false: 'Card Archived', true: 'Card Unarchived' },
+  isCardDefault: { false: 'Card Set As Default', true: 'Card Not Set As Default' },
+  isAddToGPay: { false: 'Card Added to GPay', true: 'Card Removed from GPay' },
 }
 
 const CardActions = ({ card }: { card: CardState }) => {
