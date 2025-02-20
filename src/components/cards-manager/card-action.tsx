@@ -19,7 +19,7 @@ const CardActions = ({ card }: { card: CardState }) => {
 
   const actionHandler = (card: CardState, actionType: ActionType) => {
     const currentState = card[actionType]
-    toast(messageList[actionType][String(currentState) as 'true' | 'false'])
+    toast.success(messageList[actionType][String(currentState) as 'true' | 'false'])
     dispatch(cardAction({ id: card.id, property: actionType }))
   }
 
