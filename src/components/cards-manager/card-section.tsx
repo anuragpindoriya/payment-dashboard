@@ -5,6 +5,7 @@ import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/componen
 import gpay_card from '@/assets/images/gpay_card.png'
 import CardActions from '@/components/cards-manager/card-action.tsx'
 import { useCallback, useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 
 const CardSection = ({ title, cards }: { title: string; cards: CardState[] }) => {
@@ -75,7 +76,10 @@ const CardSection = ({ title, cards }: { title: string; cards: CardState[] }) =>
         <div className="flex justify-start sm:justify-end">
           <Button
             className={`text-[12px] text-[#0C3F62]  bg-[#0FA1DB30] hover:bg-[#0FA1DB30] px-[6px] py-[3px] h-fit`}
-            onClick={() => setShowCardNumber(!showCardNumber)}>
+            onClick={() => {
+              setShowCardNumber(!showCardNumber)
+              toast.success('Card number is ' + (showCardNumber ? 'hidden' : 'visible'))
+            }}>
             <Eye width={'12px'} height={'12px'} className="inline-block" />
             <span className="ml-[5px] inline-block">{showCardNumber ? 'Hide Card Number' : 'Show Card Number'}</span>
           </Button>
