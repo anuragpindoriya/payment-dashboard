@@ -1,6 +1,7 @@
 import logo from '@/assets/images/logo.png'
 import { CreditCard, House, LogOut, Settings, Settings2, X } from 'lucide-react'
 import { useIsMobile } from '@/hooks/use-mobile'
+import { JSX } from 'react'
 
 interface SidebarProps {
   isSidebarOpen: boolean;
@@ -12,6 +13,44 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
   const handelSidebarClose = () => {
     setIsSidebarOpen(false)
   }
+  type NavList = {
+    id: string;
+    name: string;
+    path: string;
+    icon: JSX.Element;
+    isActive: boolean;
+  }
+
+  const navList: NavList[] = [
+    {
+      id: 'home',
+      name: 'Home',
+      icon: <House className="mr-1" width="17px" />,
+      path: '/',
+      isActive: false,
+    },
+    {
+      id: 'card',
+      name: 'Cards',
+      icon: <CreditCard className="mr-1" width="17px" />,
+      path: '/',
+      isActive: true,
+    },
+    {
+      id: 'transaction',
+      name: 'Transaction',
+      icon: <Settings2 className="mr-1" width="17px" />,
+      path: '/',
+      isActive: false,
+    },
+    {
+      id: 'settings',
+      name: 'Settings',
+      icon: <Settings className="mr-1" width="17px" />,
+      path: '/',
+      isActive: false,
+    },
+  ]
 
   return (
     <>
@@ -36,26 +75,20 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
             Software & Web Development Company - Umbraco Gold Partner
           </div>
           <ul className="text-white text-sm list-none m-0 p-0">
-            <li className="font-bold pt-3 pb-3 border-b border-b-[#6a94a5]">
-              <a href="#" className="flex items-center">
-                <House className="mr-1" width="17px" /> Home
-              </a>
-            </li>
-            <li className="font-bold pt-3 pb-3 border-b border-b-[#6a94a5] text-[#0FA1DB]">
-              <a href="#" className="flex items-center">
-                <CreditCard className="mr-1" width="17px" /> Cards
-              </a>
-            </li>
-            <li className="font-bold pt-3 pb-3 border-b border-b-[#6a94a5]">
-              <a href="#" className="flex items-center">
-                <Settings2 className="mr-1" width="17px" /> Transaction
-              </a>
-            </li>
-            <li className="font-bold pt-3 pb-3">
-              <a href="#" className="flex items-center">
-                <Settings className="mr-1" width="17px" /> Settings
-              </a>
-            </li>
+            {
+              navList.map((nav) => (
+                <li
+                  key={nav.id}
+                  className={`font-bold pt-3 pb-3 border-b border-b-[#6a94a5] ${
+                    nav.isActive ? 'text-[#0FA1DB]' : ''
+                  }`}
+                >
+                  <a href="#" className="flex items-center">
+                    {nav.icon} {nav.name}
+                  </a>
+                </li>
+              ))
+            }
           </ul>
           <div className="grow flex items-end w-full text-white text-base font-bold">
             <LogOut className="mr-1" width="17px" /> Logout
